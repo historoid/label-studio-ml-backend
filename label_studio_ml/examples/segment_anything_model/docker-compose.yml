@@ -43,7 +43,7 @@ services:
       # Use prefix 'http://' or 'https://' for the URL always.
       # Determine the actual IP using 'ifconfig' (Linux/Mac) or 'ipconfig' (Windows).
       - LABEL_STUDIO_HOST=http://192.168.0.170:8080
-      - LABEL_STUDIO_ACCESS_TOKEN=91ed261931135c9d694ad8e4d2a75c54f597f3f9
+      - LABEL_STUDIO_ACCESS_TOKEN=e2fca5eda59ff2398b4e82d3b0e4490a5fdc7844
     ports:
       - 9090:9090
     volumes:
