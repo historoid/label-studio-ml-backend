@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   label_studio:
-    container_name: label-studio-nict
+    container_name: label-studio-ls
     image: heartexlabs/label-studio:latest
     restart: unless-stopped
     ports:
@@ -15,7 +15,7 @@ services:
       - LABEL_STUDIO_LOCAL_FILES_DOCUMENT_ROOT=/label-studio/data/local-strage
 
   segment_anything_model:
-    container_name: sam-nict
+    container_name: sam-ls
     image: heartexlabs/label-studio-ml-backend:sam-master
     restart: unless-stopped
     build:
@@ -34,7 +34,7 @@ services:
       - NVIDIA_VISIBLE_DEVICES=all
     # specify the number of workers and threads for the model server
       - WORKERS=2
-      - THREADS=6
+      - THREADS=4
     # specify the model directory (likely you don't need to change this)
       - MODEL_DIR=/data/models
     # Specify the Label Studio URL and API key to access
@@ -62,9 +62,9 @@ services:
 
   syncthing:
     image: syncthing/syncthing
-    container_name: syncthing-nict
+    container_name: syncthing-ls
     restart: unless-stopped
-    hostname: NICT
+    hostname: LABEL-STUDIO
     environment:
       - PUID=1000
       - PGID=1000
@@ -79,7 +79,7 @@ services:
 
   jupyternotebook:
     image: jupyter/base-notebook:latest
-    container_name: jupyter-nict
+    container_name: jupyter-ls
     ports:
       - 8888:8888
     volumes:
