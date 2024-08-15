@@ -67,12 +67,12 @@ services:
     container_name: syncthing-nict
     restart: unless-stopped
     hostname: NICT
-    user: "${UID}:${GID}"
     environment:
       - PUID=1000
       - PGID=1000
     volumes:
       - ~/res/label-studio/mydata/sync:/var/syncthing/label-studio-mydata
+      - ~/res/label-studio/mydata/sync/config:/var/syncthing/config
     ports:
       - 8384:8384 # Web UI
       - 22000:22000/tcp # TCP file transfers
