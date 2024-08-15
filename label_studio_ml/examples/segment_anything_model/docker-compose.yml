@@ -82,7 +82,7 @@ services:
   jupyternotebook:
     image: jupyter/base-notebook:latest
     container_name: jupyter-ls
-    restart: unless-stoppeds
+    restart: unless-stopped
     user: "${UID}:${GID}"
     ports:
       - 8888:8888
