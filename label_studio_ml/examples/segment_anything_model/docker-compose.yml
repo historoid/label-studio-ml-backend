@@ -54,7 +54,7 @@ services:
             memory: 64G
         reservations:
             memory: 4G
-# Add this to pass through 1 GPU 
+# Add this to pass through all GPU 
             devices:
               - driver: nvidia
                 count: all
@@ -69,8 +69,7 @@ services:
       - PUID=1000
       - PGID=1000
     volumes:
-      - ~/res/label-studio/syncthing-config:/var/syncthing-config
-      - ~/res/label-studio/mydata:/var/syncthing/label-studio-mydata
+      - ~/res/label-studio/mydata/sync:/var/syncthing/label-studio-mydata
     ports:
       - 8384:8384 # Web UI
       - 22000:22000/tcp # TCP file transfers
@@ -80,10 +79,12 @@ services:
   jupyternotebook:
     image: jupyter/base-notebook:latest
     container_name: jupyter-nict
+    restart: unless-stopped
     ports:
       - 8888:8888
     volumes:
       - ~/res/label-studio/mydata/notebooks:/home/jovyan/work
+      - ~/res/label-studio/mydata/sync:/home/jovyan/sync
     environment:
       - JUPYTER_ENABLE_LAB=yes
     command: start-notebook.sh --ip=0.0.0.0 --allow-root --NotebookApp.password='' --NotebookApp.token=''
