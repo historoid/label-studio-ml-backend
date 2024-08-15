@@ -8,6 +8,7 @@ services:
     ports:
       - 8080:8080
     # local strage
+    user: "${UID}:${GID}"
     volumes:
       - ~/res/label-studio/mydata:/label-studio/data
     environment:
@@ -18,6 +19,7 @@ services:
     container_name: sam-nict
     image: heartexlabs/label-studio-ml-backend:sam-master
     restart: unless-stopped
+    user: "${UID}:${GID}"
     build:
       context: .
       shm_size: '4gb'
@@ -65,6 +67,7 @@ services:
     container_name: syncthing-nict
     restart: unless-stopped
     hostname: NICT
+    user: "${UID}:${GID}"
     environment:
       - PUID=1000
       - PGID=1000
@@ -80,6 +83,7 @@ services:
     image: jupyter/base-notebook:latest
     container_name: jupyter-nict
     restart: unless-stopped
+    user: "${UID}:${GID}"
     ports:
       - 8888:8888
     volumes:
